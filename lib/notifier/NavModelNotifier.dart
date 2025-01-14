@@ -8,9 +8,5 @@ class HomeBottomNotifier extends StateNotifier<int> {
   }
 }
 
-final homeBottomIndex = FutureProvider<HomeBottomNotifier>((ref) async {
-  //从sp中获取 获取上次打开的页面下标
-  return HomeBottomNotifier(0);
-});
-
+var curIndex = StateNotifierProvider<HomeBottomNotifier,int>((_) => HomeBottomNotifier(0));
 

@@ -4,10 +4,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hy/widget/keep_alive_wrapper.dart';
 
 import '../model/nav_model.dart';
+import '../notifier/NavModelNotifier.dart';
 import '../widget/bottom_navigation_bar.dart';
 import 'HomePage.dart';
 
-var curIndex = StateProvider((_) => 0);
 
 class HomeNavPage extends StatefulWidget {
   const HomeNavPage({super.key});
@@ -59,13 +59,13 @@ class _HomeNavPageState extends State<HomeNavPage> {
           itemCount: bottomTabs.length,
           controller: _controller,
           onPageChanged: (index) {
-            ref.read(curIndex.notifier).state = index;
+            ref.read(curIndex.notifier).changeIndex(index);
           },
         ),
         bottomNavigationBar: CustomBottomNavBar(
           currentIndex: ref.watch(curIndex),
           onTap: (index) {
-            ref.read(curIndex.notifier).state = index;
+            ref.read(curIndex.notifier).changeIndex(index);
             _controller.jumpToPage(index);
           },
           bottomList: bottomTabs,

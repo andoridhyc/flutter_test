@@ -1,4 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hy/page/home_nav_page.dart';
@@ -15,11 +18,17 @@ void main() async {
   SpUtlis.preInit();
   var spLocal = SpUtlis.getInstance()?.get<String>(locale);
   if (spLocal == 'zh') {
-    localeProvider= StateProvider((_)=> Locale('zh'));
-  }else{
-    localeProvider= StateProvider((_)=> Locale('en'));
+    localeProvider = StateProvider((_) => Locale('zh'));
+  } else {
+    localeProvider = StateProvider((_) => Locale('en'));
   }
-
+  //设置透明状态栏
+  if (Platform.isAndroid) {
+    SystemUiOverlayStyle systemUiOverlayStyle = const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+        statusBarIconBrightness: Brightness.dark);
+    SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
+  }
   runApp(ProviderScope(child: MyApp()));
 }
 
@@ -31,9 +40,9 @@ class MyApp extends StatelessWidget {
     return Consumer(builder: (context, ref, child) {
       var local = ref.watch(localeProvider);
       return MaterialApp.router(
-        onGenerateTitle: (context){
+        onGenerateTitle: (context) {
           // 此时context在Localizations的子树中
-          return S.of(context).home ;
+          return S.of(context).home;
         },
         locale: local,
         localizationsDelegates: const [
@@ -43,7 +52,6 @@ class MyApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: S.delegate.supportedLocales,
-
         theme: ThemeData(
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
           useMaterial3: true,
@@ -52,10 +60,7 @@ class MyApp extends StatelessWidget {
         ),
         routerConfig: AppRouter.router,
         debugShowCheckedModeBanner: false,
-
       );
     });
   }
-
 }
-
