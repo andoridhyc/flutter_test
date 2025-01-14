@@ -5,7 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hy/page/setting_page.dart';
 
 import '../page/error_page.dart';
-import '../page/home_page.dart';
+import '../page/home_nav_page.dart';
 
 class AppRouter {
   static final GoRouter _router = GoRouter(
@@ -13,7 +13,7 @@ class AppRouter {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const HomePage(),
+        builder: (context, state) => const HomeNavPage(),
       ),
       GoRoute(
         path: '/setting',

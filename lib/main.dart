@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hy/page/home_page.dart';
+import 'package:hy/page/home_nav_page.dart';
 import 'package:hy/route/app_router.dart';
 import 'package:hy/utlis/sp_utlils.dart';
 
