@@ -6,7 +6,7 @@ import 'package:hy/widget/keep_alive_wrapper.dart';
 import '../model/nav_model.dart';
 import '../notifier/NavModelNotifier.dart';
 import '../widget/bottom_navigation_bar.dart';
-import 'HomePage.dart';
+import 'home_page.dart';
 
 
 class HomeNavPage extends StatefulWidget {

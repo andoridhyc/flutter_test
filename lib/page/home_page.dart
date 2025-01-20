@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hy/widget/keep_alive_wrapper.dart';
+
+import 'home_tab_list.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -43,14 +46,21 @@ class HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           tabs: tabs.map((it) {
                             return Tab(text: it);
                           }).toList(),
+                          onTap: (index) {
+                            _pageController?.jumpToPage(index);
+                          },
                         ),
                         Expanded(
-                          child: PageView(
+                          child: PageView.builder(
+                            itemBuilder: (context,index){
+                              return KeepAliveWrapper(child: HomeTabList());
+                            },
                             controller: _pageController,
-                            children: tabs.map((it) {
-                              return Text(it);
-                            }).toList(),
-                          ),
+                            itemCount: tabs.length,
+                            onPageChanged: (index){
+                              _tabController?.animateTo(index);
+                            },
+                          )
                         )
                       ],
                     );
